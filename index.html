@@ -136,7 +136,7 @@
   var stage=document.getElementById('stage'),invitation=document.getElementById('invitation'),opened=false;
   function openGates(){ if(opened)return;opened=true;stage.classList.add('open');
     setTimeout(function(){invitation.classList.add('reveal');},900);
-    setTimeout(function(){stage.classList.add('gone');startAuto();},2400);
+    /*setTimeout(function(){stage.classList.add('gone');startAuto();},2400);*/
   }
   stage.addEventListener('click',openGates);
   stage.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openGates();}});
