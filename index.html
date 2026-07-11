@@ -143,12 +143,12 @@
   var slides=[].slice.call(document.querySelectorAll('.slide')),dots=[].slice.call(document.querySelectorAll('.dot'));
   var current=0,timer=null,DELAY=5500;
   function show(i){i=(i+slides.length)%slides.length;slides[current].classList.remove('active');dots[current].classList.remove('active');current=i;slides[current].classList.add('active');dots[current].classList.add('active');}
-   /*
+   
   function next(){show(current+1);}function prev(){show(current-1);}
  function startAuto(){stopAuto();timer=setInterval(next,DELAY);}
   function stopAuto(){if(timer){clearInterval(timer);timer=null;}}
   function restart(){stopAuto();startAuto();}
-  */
+  
   document.getElementById('next').addEventListener('click',function(){next();restart();});
   document.getElementById('prev').addEventListener('click',function(){prev();restart();});
   dots.forEach(function(d){d.addEventListener('click',function(){show(parseInt(d.dataset.i,10));restart();});});
