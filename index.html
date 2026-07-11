@@ -126,7 +126,7 @@
       <button class="dot" data-i="1" aria-label="Go to slide 2"></button>
       <button class="dot" data-i="2" aria-label="Go to slide 3"></button>
     </div>
-    <a class="rsvp-btn" href="https://www.zola.com/wedding/ireneandgrant2026/rsvp" target="_blank" rel="noopener"><span class="heart">&#10084;</span> RSVP</a>
+    <a class="rsvp-btn" href="https://www.zola.com/wedding/ireneandgrant2026" target="_blank" rel="noopener"><span class="heart">&#10084;</span> RSVP</a>
     <p class="caption"><span class="mono">With love,</span>Irene &amp; Grant · 29 November 2026</p>
     <p class="footer-note">Tagaytay, Philippines</p>
   </main>
@@ -136,27 +136,21 @@
   var stage=document.getElementById('stage'),invitation=document.getElementById('invitation'),opened=false;
   function openGates(){ if(opened)return;opened=true;stage.classList.add('open');
     setTimeout(function(){invitation.classList.add('reveal');},900);
-    setTimeout(function(){stage.classList.add('gone');startAuto();},2400);
-    
+    setTimeout(function(){stage.classList.add('gone');},2400);
   }
   stage.addEventListener('click',openGates);
   stage.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openGates();}});
   var slides=[].slice.call(document.querySelectorAll('.slide')),dots=[].slice.call(document.querySelectorAll('.dot'));
-  var current=0,timer=null,DELAY=5500;
+  var current=0;
   function show(i){i=(i+slides.length)%slides.length;slides[current].classList.remove('active');dots[current].classList.remove('active');current=i;slides[current].classList.add('active');dots[current].classList.add('active');}
-   
   function next(){show(current+1);}function prev(){show(current-1);}
- function startAuto(){stopAuto();timer=setInterval(next,DELAY);}
-  function stopAuto(){if(timer){clearInterval(timer);timer=null;}}
-  function restart(){stopAuto();startAuto();}
-  
-  document.getElementById('next').addEventListener('click',function(){next();restart();});
-  document.getElementById('prev').addEventListener('click',function(){prev();restart();});
-  dots.forEach(function(d){d.addEventListener('click',function(){show(parseInt(d.dataset.i,10));restart();});});
+  document.getElementById('next').addEventListener('click',next);
+  document.getElementById('prev').addEventListener('click',prev);
+  dots.forEach(function(d){d.addEventListener('click',function(){show(parseInt(d.dataset.i,10));});});
   var carousel=document.getElementById('carousel'),sx=0;
   carousel.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
-  carousel.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45){dx<0?next():prev();restart();}},{passive:true});
-  document.addEventListener('keydown',function(e){if(!opened)return;if(e.key==='ArrowRight'){next();restart();}if(e.key==='ArrowLeft'){prev();restart();}});
+  carousel.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45){dx<0?next():prev();}},{passive:true});
+  document.addEventListener('keydown',function(e){if(!opened)return;if(e.key==='ArrowRight'){next();}if(e.key==='ArrowLeft'){prev();}});
 })();
 </script>
 </body>
